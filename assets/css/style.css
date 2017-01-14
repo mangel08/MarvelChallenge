@@ -1,0 +1,15 @@
+.logo-adjust{
+	margin-left: 20px;
+}
+
+.img-logo{
+	width: 150px;
+	height: 55px;
+	margin-top: 5px;
+}
+.nav-wrapper form{
+	max-width: 600px;
+	max-height: 100px;
+	float: right;
+	
+}
