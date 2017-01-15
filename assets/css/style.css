@@ -1,5 +1,5 @@
 .logo-adjust{
-	margin-left: 20px;
+	margin-left: 50px;
 }
 
 .img-logo{
@@ -7,9 +7,84 @@
 	height: 55px;
 	margin-top: 5px;
 }
+
+.footer-copyright{
+
+	margin-bottom: 10px; 
+}
 .nav-wrapper form{
-	max-width: 600px;
+	max-width: 400px;
 	max-height: 100px;
 	float: right;
 	
 }
+
+.sidebar {
+    height: 100%;
+    padding-bottom: 100%;
+    
+}
+
+.character{
+	float:left; 
+	margin-right: -50px;
+}
+
+.texto{
+	padding-left: 60px;
+	padding-top: 5px;
+	font-size: 20px;
+}
+.content{
+	height: 100%;
+	padding-bottom: 100%;
+}
+
+.margen{
+	padding: 20px;
+}
+
+.bread{
+	height: 40px;
+}
+
+.comics{
+	height: 500px;
+}
+
+.sort{
+	margin-top: -20px;
+}
+.pagination{
+	left:0px;
+   bottom:0px;
+   width: 100%;
+}
+/*.footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:70px;
+   width:100%;
+   color: #eee;
+   font-size: 14px;
+}
+
+.footer .copy{
+	margin-top: 25px;
+}
+
+.footer .logo{
+	margin-top: 10px;
+}
+*/
+.ft {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   max-height: 90px;  
+   width:100%;
+   color: #eee;
+   font-size: 14px;
+}
+
