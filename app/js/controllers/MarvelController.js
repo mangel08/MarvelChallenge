@@ -1,13 +1,18 @@
 App.controller("MarvelController", function ($scope, $rootScope, serviceMarvel){
  
 	$scope.sort = "Sort";
-	console.log($rootScope.apikey);
 
 	$scope.getAllCharacters = function(){
-	var x = serviceMarvel.getAllCharacters($rootScope.apikey)
+	var x = serviceMarvel.getAllCharacters($rootScope.apikey);
 	x.then(function(response){
 
-		console.log(response);
+		$scope.name_character = response.data.data.results[0].name;
+		let path = response.data.data.results[0].thumbnail.path;
+		let variant = "/landscape_incredible";
+		let ext = "."+response.data.data.results[0].thumbnail.extension;
+		$scope.photo_url = path+variant+ext;
+
+		console.log(response.data);
 
 		},function(errorMsg){
 	      	console.log(errorMsg);
@@ -15,6 +20,6 @@ App.controller("MarvelController", function ($scope, $rootScope, serviceMarvel){
 	    });
 	};
 
-	$scope.getAllCharacters();
+	
 	
 });

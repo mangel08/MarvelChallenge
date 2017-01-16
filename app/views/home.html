@@ -1,5 +1,5 @@
 <!-- BREADCRUMB CHARACTERS -->
-<div ng-controller="MarvelController">
+<div ng-controller="MarvelController" ng-init="getAllCharacters();">
 
 	<div class="row bread">
 	 	<div class="col s6 m6 l6 left">
@@ -22,8 +22,46 @@
 	<!-- END BREADCRUMB CHARACTERS -->
 
 		<div class="row">
-	        <div class="col s12 m6 l6">
-	           <div class="card medium">
+	        <div class="col s12 m12 l6">
+	           <div class="card card horizontal small z-depth-4">
+	            <div class="card-image">
+	              <img ng-src="{{photo_url}}" style="background-position: center top; background-size: cover;">
+	              <span class="card-title white-text"><strong>{{name_character}}</strong></span>
+	            </div>
+		           <div class="card-stacked">
+			        	<div class="card-content">
+			          		<p>I am a very simple card. I am good at containing small bits of information.</p>
+			        	</div>
+			        	<div class="card-action">
+			          		<a class="waves-effect waves-light btn red">View more</a>
+			        	</div>
+	          		</div>
+	          </div>
+	        </div>
+
+
+
+	          <div class="col s12 m12 l6">
+	             <div class="card large">
+				    <div class="card-image comics waves-effect waves-block waves-light">
+				    	<img class="activator" ng-src="{{photo_url}}" characts">
+				    </div>
+				    <div class="card-content">
+				    	<span class="card-title activator grey-text text-darken-4"><strong>{{name_character}}</strong><i class="material-icons right">more_vert</i></span>
+				    </div>
+				    <div class="card-action">
+		          		  <a href="#" class="black-text">This is a link</a>
+			        	</div>
+				  <!--   <div class="card-reveal">
+				     	<span class="card-title grey-text text-darken-4"><strong>{{name_character}}</strong><i class="material-icons right">close</i></span>
+				      	<p>Here is some more information about this product that is only revealed once clicked on.</p>
+				      	<p><a class="waves-effect waves-light btn red">View more</a></p>
+				    </div> -->
+			  	</div>
+	        </div>
+
+	         <div class="col s12 m12 l6">
+	           <div class="card large">
 	            <div class="card-image">
 	              <img src="assets/img/icons/Marvel-Logo.png">
 	              <span class="card-title black-text"><strong>Card Title</strong></span>
@@ -39,25 +77,8 @@
 	          </div>
 	        
 
-	         <div class="col s12 m6 l6">
-	           <div class="card medium">
-	            <div class="card-image">
-	              <img src="assets/img/icons/Marvel-Logo.png">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div>
-	        
-
-	         <div class="col s12 m6 l6">
-	           <div class="card medium">
+	         <div class="col s12 m12 l6">
+	           <div class="card large">
 	            <div class="card-image">
 	              <img src="assets/img/icons/Marvel-Logo.png">
 	              <span class="card-title black-text"><strong>Card Title</strong></span>
@@ -73,8 +94,8 @@
 	          </div>
 	    
 
-	         <div class="col s12 m6 l6">
-	           <div class="card medium">
+	         <div class="col s12 m12 l6">
+	           <div class="card large">
 	            <div class="card-image">
 	              <img src="assets/img/icons/Marvel-Logo.png">
 	              <span class="card-title black-text"><strong>Card Title</strong></span>
@@ -90,8 +111,8 @@
 	          </div>
 	  
 
-	         <div class="col s12 m6 l6">
-	           <div class="card medium">
+	         <div class="col s12 m12 l6">
+	           <div class="card large">
 	            <div class="card-image">
 	              <img src="assets/img/icons/Marvel-Logo.png">
 	              <span class="card-title black-text"><strong>Card Title</strong></span>
@@ -107,8 +128,8 @@
 	          </div>
 	     
 
-	         <div class="col s12 m6 l6">
-	           <div class="card medium">
+	         <div class="col s12 m12 l6">
+	           <div class="card large">
 	            <div class="card-image">
 	              <img src="assets/img/icons/Marvel-Logo.png">
 	              <span class="card-title black-text"><strong>Card Title</strong></span>
@@ -124,8 +145,8 @@
 	          </div>
 	    
 
-	         <div class="col s12 m6 l6">
-	           <div class="card medium">
+	         <div class="col s12 m12 l6">
+	           <div class="card large">
 	            <div class="card-image">
 	              <img src="assets/img/icons/Marvel-Logo.png">
 	              <span class="card-title black-text"><strong>Card Title</strong></span>
@@ -141,8 +162,8 @@
 	          </div>
 	   
 
-	         <div class="col s12 m6 l6">
-	           <div class="card medium">
+	         <div class="col s12 m12 l6">
+	           <div class="card large">
 	            <div class="card-image">
 	              <img src="assets/img/icons/Marvel-Logo.png">
 	              <span class="card-title black-text"><strong>Card Title</strong></span>
@@ -157,8 +178,8 @@
 	          </div>
 	          </div>
 
-	          <div class="col s12 m6 l6">
-	           <div class="card medium">
+	          <div class="col s12 m12 l6">
+	           <div class="card large">
 	            <div class="card-image">
 	              <img src="assets/img/icons/Marvel-Logo.png">
 	              <span class="card-title black-text"><strong>Card Title</strong></span>
@@ -173,8 +194,8 @@
 	          </div>
 	          </div>
 
-	          <div class="col s12 m6 l6">
-	           <div class="card medium">
+	          <div class="col s12 m12 l6">
+	           <div class="card large">
 	            <div class="card-image">
 	              <img src="assets/img/icons/Marvel-Logo.png">
 	              <span class="card-title black-text"><strong>Card Title</strong></span>
