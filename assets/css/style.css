@@ -13,15 +13,15 @@
 	margin-bottom: 10px; 
 }
 .nav-wrapper form{
-	max-width: 400px;
-	max-height: 100px;
-	float: right;
+	max-width: 100%;
+	/*max-height: 100px;*/
+	/*float: right;*/
 	
 }
 
 .sidebar {
     height: 100%;
-    padding-bottom: 100%;
+    padding-bottom: 100px;
     
 }
 
@@ -33,11 +33,12 @@
 .texto{
 	padding-left: 60px;
 	padding-top: 5px;
-	font-size: 20px;
+	font-size: 22px;
 }
 .content{
 	height: 100%;
-	padding-bottom: 100%;
+	padding-bottom: 20px;
+	
 }
 
 .margen{
@@ -59,32 +60,25 @@
 	left:0px;
    bottom:0px;
    width: 100%;
-}
-/*.footer {
-   position:fixed;
-   left:0px;
-   bottom:0px;
-   height:70px;
-   width:100%;
-   color: #eee;
-   font-size: 14px;
+   padding-bottom: 20px;
 }
 
-.footer .copy{
-	margin-top: 25px;
-}
-
-.footer .logo{
-	margin-top: 10px;
-}
-*/
 .ft {
    position:fixed;
    left:0px;
    bottom:0px;
-   max-height: 90px;  
+   max-height: 70px;  
    width:100%;
    color: #eee;
-   font-size: 14px;
+   font-size: 16px;
 }
 
+@font-face {
+    font-family: RobotoBold;
+    src: url(../plugins/materialize-css/fonts/roboto/Roboto-Bold.woff2);
+}
+
+@font-face {
+    font-family: RobotoBold;
+    src: url(../plugins/materialize-css/fonts/roboto/Roboto-Regular.woff2);
+}
