@@ -7,10 +7,13 @@ App.controller("MarvelController", function ($scope, $rootScope, serviceMarvel){
 	x.then(function(response){
 
 		$scope.name_character = response.data.data.results[0].name;
+
 		let path = response.data.data.results[0].thumbnail.path;
-		let variant = "/landscape_incredible";
+		let variant = "/standard_fantastic";
 		let ext = "."+response.data.data.results[0].thumbnail.extension;
 		$scope.photo_url = path+variant+ext;
+
+		$scope.comics = response.data.data.results[0].comics.items[0].name;
 
 		console.log(response.data);
 

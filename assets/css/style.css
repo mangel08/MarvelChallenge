@@ -54,12 +54,10 @@
 }
 
 .characts{
-	/*height: 500px;*/
-	background-position: center top; 
-	background-size: cover; 
-	width: 200px; 
-	height: 200px; 
-	border-radius: 50%;
+	height: 300px;
+	background-position: inherit; 
+	background-size: contain;
+	max-width: 100%; 
 }
 
 .sort{
