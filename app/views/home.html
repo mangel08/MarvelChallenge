@@ -1,5 +1,5 @@
 <!-- BREADCRUMB CHARACTERS -->
-<div ng-controller="MarvelController" ng-init="getAllCharacters();">
+<div ng-controller="MarvelController" ng-init="getAllCharacters(0,10);">
 
 	<div class="row bread">
 	 	<div class="col s6 m6 l6 left">
@@ -22,10 +22,10 @@
 	<!-- END BREADCRUMB CHARACTERS -->
 
 		<div class="row">
-	        <div class="col s12 m12 l6">
+	        <!-- <div class="col s12 m12 l6">
 	           <div class="card card horizontal small z-depth-4">
 	            <div class="card-image">
-	              <img ng-src="{{photo_url}}" style="background-position: center top; background-size: cover;">
+	              <img ng-src="{{photo_url}}" class="responsive-img" style="background-position: center top; background-size: cover;">
 	              <span class="card-title white-text"><strong>{{name_character}}</strong></span>
 	            </div>
 		           <div class="card-stacked">
@@ -37,35 +37,51 @@
 			        	</div>
 	          		</div>
 	          </div>
-	        </div>
+	        </div> -->
 
+	    <div ng-show="loader" class="row">
+			<div class="col l12 m12 s12">
+				<div class="preloader-wrapper big active loading">
+					<div class="spinner-layer spinner-red-only">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div>
+						<div class="gap-patch">
+							<div class="circle"></div>
+						</div>
+						<div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			
 
-
-	          <div class="col s12 m12 l6">
-	             <div class="card large sticky-action">
-				    <div class="card-image comics waves-effect waves-block waves-light">
-				    	<img class="activator characts" ng-src="{{photo_url}}">
+	          <div ng-hide="loader" class="col s12 m12 l6" style="margin-bottom: 5px;" ng-repeat="char in comic_obj">
+	             <div class="card large z-depth-4">
+				    <div class="card-image characts waves-effect waves-block waves-light">
+				    	<img class="activator characts" ng-src="{{char.photo_url}}">
+				    	<!--  <span class="card-title white-text"><b>{{char.name}}</b></span> -->
 				    </div>
-				    <div class="card-content">
-				    	<span class="card-title activator grey-text text-darken-4"><strong>{{name_character}}</strong><i class="material-icons right">more_vert</i></span>
-				    	<p>Here is some more information about this product that is only revealed once clicked on.</p>
-				    </div>
-				    <div class="card-action">
-				    	<span class="card-title grey-text text-darken-4"><strong>Related Comics</strong></span><br>
-				    		
-		          		  <a href="#" class="black-text">{{comics}}</a>
-		          		
-		          		
-			        	</div>
-				    <div class="card-reveal">
-				     	<span class="card-title grey-text text-darken-4"><strong>{{name_character}}</strong><i class="material-icons right">close</i></span>
-				      	<p>Here is some more information about this product that is only revealed once clicked on.</p>
-				      	<p><a class="waves-effect waves-light btn red">View more</a></p>
+		        	 <div class="card-content des">
+				    	<span class="card-title grey-text text-darken-4"><strong>{{char.name}}</strong></span>
+				      	<p>{{char.description}}</p>
+				      	<a class="waves-effect waves-light btn red right">View more</a>
+		        	</div>
+				    <div class="card-reveal rel-comics">
+				    <span class="card-title grey-text text-darken-1"><b>Related comics</b><i class="material-icons right">close</i></span>
+				    	<div class="row">
+				    		<div class="col s6 m6 l6" ng-repeat-end ng-repeat-start="x in char.comics">
+				    			 <p href="#" class="red-text padd">{{x}}</p>
+				    		</div>
+				    	</div>
+				     	
 				    </div>
 			  	</div>
 	        </div>
 
-	         <div class="col s12 m12 l6">
+	         <!-- <div class="col s12 m12 l6">
 	           <div class="card large">
 	            <div class="card-image comics">
 	              <img src="assets/img/icons/Marvel-Logo.png" class="comics">
@@ -213,26 +229,27 @@
 	              <a href="#">This is a link</a>
 	            </div>
 	          </div>
-	          </div>
+	          </div> -->
 	        
 	      
 	</div>
 
 
 
-	<div class="row" style="margin: auto;">
+	<div ng-hide="loader" class="row" style="margin: auto;">
 		
 		<div class="col l12 m12 s12 pagination">
 			<pagination
+				ng-model="currentPage"
 			    page="1"
 			    page-size="10"
-			    total="200"
+			    total="total"
 			    show-prev-next="true"
 			    use-simple-prev-next="false"
 			    dots="...."
 			    hide-if-empty="false"
-			    adjacent="5"
-			    scroll-top="false"
+			    adjacent="3"
+			    scroll-top="true"
 			    pagination-action="changePage(page)" />
 		</div>
 	</div>

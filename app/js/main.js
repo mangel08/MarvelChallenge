@@ -23,10 +23,7 @@ App.config(function($routeProvider){
 });
 
 App.controller("HeaderController", function($scope, $rootScope){
-	$(document).ready(function() {
-	$(".button-collapse").sideNav();
-	});
-	
+		
 	$scope.bool = true;
 	// alert($scope.bool);
 
