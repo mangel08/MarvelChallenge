@@ -11,9 +11,8 @@
 	  	<div class="input field bread sort col s2 m2 l2 right">
 	  		<div input-field class="black-text">
 		    	<select  ng-model="sort" material-select watch>
-		    		 <option disabled selected>Sort</option>
-		        	 <option value="2" selected="selected">Option 1</option>
-	      			 <option value="3">Option 2</option>
+		        	 <option value="Upward" selected="selected">Upward</option>
+	      			 <option value="Falling">Falling</option>
 		    	</select>
 		  	</div>
 		</div>
@@ -22,25 +21,9 @@
 	<!-- END BREADCRUMB CHARACTERS -->
 
 		<div class="row">
-	        <!-- <div class="col s12 m12 l6">
-	           <div class="card card horizontal small z-depth-4">
-	            <div class="card-image">
-	              <img ng-src="{{photo_url}}" class="responsive-img" style="background-position: center top; background-size: cover;">
-	              <span class="card-title white-text"><strong>{{name_character}}</strong></span>
-	            </div>
-		           <div class="card-stacked">
-			        	<div class="card-content">
-			          		<p>I am a very simple card. I am good at containing small bits of information.</p>
-			        	</div>
-			        	<div class="card-action">
-			          		<a class="waves-effect waves-light btn red">View more</a>
-			        	</div>
-	          		</div>
-	          </div>
-	        </div> -->
 
-	    <div ng-show="loader" class="row">
-			<div class="col l12 m12 s12">
+	    <div ng-show="loader" class="row" style="margin: auto;">
+			<div class="col l6 m6 s6">
 				<div class="preloader-wrapper big active loading">
 					<div class="spinner-layer spinner-red-only">
 						<div class="circle-clipper left">
@@ -58,184 +41,68 @@
 		</div>
 			
 
-	          <div ng-hide="loader" class="col s12 m12 l6" style="margin-bottom: 5px;" ng-repeat="char in comic_obj">
+	          <div ng-hide="loader" class="col s12 m12 l6" style="margin-bottom: 5px;" ng-repeat="char in comic_obj | orderBy:sort">
 	             <div class="card large z-depth-4">
 				    <div class="card-image characts waves-effect waves-block waves-light">
 				    	<img class="activator characts" ng-src="{{char.photo_url}}">
 				    	<!--  <span class="card-title white-text"><b>{{char.name}}</b></span> -->
 				    </div>
-		        	 <div class="card-content des">
-				    	<span class="card-title grey-text text-darken-4"><strong>{{char.name}}</strong></span>
+		        	 <div class="card-content des carta">
+				    	<span class="card-title grey-text text-darken-4" style="font-size: 20px;"><strong>{{char.name}}</strong></span>
 				      	<p>{{char.description}}</p>
-				      	<a class="waves-effect waves-light btn red right">View more</a>
+				      	<p><a class="waves-effect waves-light btn red activator viewmore right">View more</a></p>
 		        	</div>
 				    <div class="card-reveal rel-comics">
 				    <span class="card-title grey-text text-darken-1"><b>Related comics</b><i class="material-icons right">close</i></span>
 				    	<div class="row">
 				    		<div class="col s6 m6 l6" ng-repeat-end ng-repeat-start="x in char.comics">
-				    			 <p href="#" class="red-text padd">{{x}}</p>
+				    			 <img style="float: left; display: none; padding-right: 10px; padding-top: 15px;" src="assets/img/icons/link-arrow.png" id="comic" title="{{x.name}}"></img><p style="text-decoration: underline;" ng-click="selectComic(x.name,x.id);" value="{{x.name}}" id="comic2" class="red-text padd">{{x.name }}</p>
+				    			
 				    		</div>
 				    	</div>
 				     	
 				    </div>
 			  	</div>
 	        </div>
-
-	         <!-- <div class="col s12 m12 l6">
-	           <div class="card large">
-	            <div class="card-image comics">
-	              <img src="assets/img/icons/Marvel-Logo.png" class="comics">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div>
-	        
-
-	         <div class="col s12 m12 l6">
-	           <div class="card large">
-	            <div class="card-image">
-	              <img src="assets/img/icons/Marvel-Logo.png">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div>
-	    
-
-	         <div class="col s12 m12 l6">
-	           <div class="card large">
-	            <div class="card-image">
-	              <img src="assets/img/icons/Marvel-Logo.png">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div>
-	  
-
-	         <div class="col s12 m12 l6">
-	           <div class="card large">
-	            <div class="card-image">
-	              <img src="assets/img/icons/Marvel-Logo.png">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div>
-	     
-
-	         <div class="col s12 m12 l6">
-	           <div class="card large">
-	            <div class="card-image">
-	              <img src="assets/img/icons/Marvel-Logo.png">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div>
-	    
-
-	         <div class="col s12 m12 l6">
-	           <div class="card large">
-	            <div class="card-image">
-	              <img src="assets/img/icons/Marvel-Logo.png">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div>
-	   
-
-	         <div class="col s12 m12 l6">
-	           <div class="card large">
-	            <div class="card-image">
-	              <img src="assets/img/icons/Marvel-Logo.png">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div>
-
-	          <div class="col s12 m12 l6">
-	           <div class="card large">
-	            <div class="card-image">
-	              <img src="assets/img/icons/Marvel-Logo.png">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div>
-
-	          <div class="col s12 m12 l6">
-	           <div class="card large">
-	            <div class="card-image">
-	              <img src="assets/img/icons/Marvel-Logo.png">
-	              <span class="card-title black-text"><strong>Card Title</strong></span>
-	            </div>
-	            <div class="card-content">
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	            </div>
-	          </div>
-	          </div> -->
-	        
-	      
 	</div>
 
+		  <!-- Modal Structure -->
+		  <div id="modal1" class="modal large">
+		    <div class="modal-content">
+		    	<div class="row">
+		    	<img style="float:right" class="modal-action modal-close" ng-src="assets/img/icons/btn-close.png"/>
+		    		<div class="col s6" style="width: 200px; height: 250px;">
+					    <img  style="width: 200px; height: 250px;" ng-src="{{comic_detail.img}}"/>
+					</div>
+					<div class="col s6 des-comic" style="margin-left: 20px;">
+					
+						<h4>{{comic_detail.title}}</h4>
+					      <p>{{comic_detail.description}}</p>
+					</div>
+			    </div>
+		    </div>
+		    <div class="modal-footer" style=" bottom: 0;">
+		    	
+		    		<div class="row">
+		    		<!-- <div class="col s6"> -->
+		    			<div ng_hide="boolFav">
+			      			<a class="waves-effect waves-default btn-flat gray ligthen-3 gray-text text-darken-2" ng-click="saveComic(comic_detail.title,comic_detail.img, comic_detail.id)" style="width: 50%; height: 60px; float: left; padding-top: 10px;">ADD TO FAVOURITES
+			      			<img style="float:left; margin-right: 20px; padding-left: 5px;" src="assets/img/icons/btn-favourites-default.png"></a>  
+						</div>
 
+						<div ng-show="boolFav">
+			      			<a class="waves-effect waves-default btn-flat brown darken-4 orange-text text-darken-3" style="width: 50%; height: 60px; float: left; padding-top: 10px;">ADDED TO FAVOURITES
+			      			<img style="float:left; margin-right: 20px; padding-left: 5px;" src="assets/img/icons/btn-favourites-primary.png"></a>  
+						</div>
 
+		      		
+		      	<!-- 	<div class="col s6"> -->
+		      			<a active class="waves-effect waves-light btn-flat gray ligthen-3 gray-text text-darken-2" style="width: 50%; float:right; padding-top: 10px; height: 60px;">BUY FOR ${{comic_detail.price}}
+		      			<img style="float:left; margin-right: 20px; padding-left: 5px;" src="assets/img/icons/shopping-cart-primary.png"></a>  
+		      		</div>
+		      	</div>
+		    </div>
+	
 	<div ng-hide="loader" class="row" style="margin: auto;">
 		
 		<div class="col l12 m12 s12 pagination">
@@ -253,7 +120,15 @@
 			    pagination-action="changePage(page)" />
 		</div>
 	</div>
-
+<script type="text/javascript">
+		$(document).ready(function() {
+    	// $('select').material_select();
+    	$('.modal').modal();
+    	 $('.materialboxed').materialbox();
+    	  $('.tooltipped').tooltip({delay: 50});
+	
+  	});
+	</script>
 </div>
 
 

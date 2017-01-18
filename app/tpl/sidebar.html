@@ -9,60 +9,19 @@
 </div>
 <!-- END BREADCRUMB FAVOURITES -->
 
-<!-- <div class="row">
-
-	<div class="col s12 m12 l12">
-       <div class="card large">
-        	<div class="card-image comics">
-          		<img class="comics" src="assets/img/icons/Marvel-Logo.png">
-          		<span class="card-title black-text"><strong>Card Title</strong>
-        	</div>
-        <div class="card-content">
-          <p class="flow-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-      </div>
+<div class="row" ng-hide="boolList">
+  	<div class="col s12 m12 l12 des" ng-repeat="list in comics_fav">
+          <div class="content-comic">
+         <img class="materialboxed " data-caption="{{list.title}}" width="250" height="320" ng-src="{{list.img}}">
+         <a  ng-click="deleteComic(list.id)"><img class="content-comic-delete" ng-src="assets/img/icons/btn-delete.png"/></a>
+          <p class="card-title black-text" style="text-align: center;"><strong>{{list.title}}</strong></p>
+          </div>
     </div>
+</div>
 
-    <div class="col s12 m12 l12">
-       <div class="card large">
-        	<div class="card-image comics">
-          		<img class="comics" src="assets/img/icons/Marvel-Logo.png">
-          		<span class="card-title black-text"><strong>Card Title</strong>
-        	</div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-      </div>
+<div class="row" ng-show="boolList">
+    <div class="col s12 m12 l12 des">
+          <p><strong>Does not have favorite comics....</strong></p>
     </div>
-
-    <div class="col s12 m12 l12">
-       <div class="card large">
-        	<div class="card-image comics">
-          		<img class="comics" src="assets/img/icons/Marvel-Logo.png">
-          		<span class="card-title black-text"><strong>Card Title</strong>
-        	</div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col s12 m12 l12">
-       <div class="card large">
-        	<div class="card-image comics">
-          		<img class="comics" src="assets/img/icons/Marvel-Logo.png">
-          		<span class="card-title black-text"><strong>Card Title</strong>
-        	</div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-      </div>
-    </div>
-
-
-</div> -->
+</div>
 

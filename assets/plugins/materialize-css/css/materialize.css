@@ -5353,12 +5353,11 @@ button.btn-floating {
   right: 0;
   background-color: #fafafa;
   padding: 0;
-  max-height: 70%;
+  height: 320px;
   width: 55%;
   margin: auto;
-  overflow-y: auto;
   border-radius: 2px;
-  will-change: top, opacity;
+  will-change: top, opacity .5;
 }
 
 @media only screen and (max-width: 992px) {
@@ -5372,7 +5371,7 @@ button.btn-floating {
 }
 
 .modal .modal-content {
-  padding: 24px;
+  padding: 10px;
 }
 
 .modal .modal-close {
@@ -5381,15 +5380,15 @@ button.btn-floating {
 
 .modal .modal-footer {
   border-radius: 0 0 2px 2px;
-  background-color: #fafafa;
-  padding: 4px 6px;
-  height: 56px;
+  background-color: #e0e0e0;
+  padding: 0px 0px 0px 0px;
+  height: 80px;
   width: 100%;
 }
 
 .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
   float: right;
-  margin: 6px 0;
+  margin: 0px 0;
 }
 
 .modal-overlay {

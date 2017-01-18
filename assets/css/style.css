@@ -54,9 +54,13 @@
 }
 
 .characts{
-	height: 200px;
+	height: 250px;
 	background-position: center center; 
 	background-size: cover;
+}
+
+.charc-content{
+	height: 300px;
 }
 
 .sort{
@@ -79,16 +83,24 @@
     overflow: hidden; 
 }
 
+.rel-comics a{
+	line-height: 1.5em;
+    height: 3em;       
+    overflow: hidden;
+    margin-top: 5px; 
+}
+
 .des p{
 	line-height: 1.5em;
     height: 6em;       
     overflow: hidden;  
 }
 
-.name_char{
-	line-height: 1em;
-    height: 1em;       
-    overflow: hidden;  
+.des-comic p{
+	line-height: 1.5em;
+    height: 7em;       
+    overflow: hidden;
+    text-overflow: ellipsis;  
 }
 .des a{
 	bottom: inherit;
@@ -100,6 +112,28 @@
 
 }
 
+.content-comic {
+    position: relative;
+}
+
+.content-comic-delete  {
+    position: absolute;
+    top: -10px;
+    right: -1px;
+}
+
+.char-name{
+	font-size: 18px;
+}
+
+.carta{
+	height: 600px;
+}
+
+.viewmore{
+	margin-top: 10px;
+	bottom: 0;
+}
 body {
     display: flex;
     min-height: 100vh;
@@ -109,6 +143,12 @@ body {
   main {
     flex: 1 0 auto;
   }
+
+.rectangule-comic{
+	width: 150px;
+	height: 200px;
+
+}
 
 @font-face {
     font-family: RobotoBold;
