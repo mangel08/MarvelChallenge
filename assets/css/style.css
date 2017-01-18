@@ -98,10 +98,19 @@
 
 .des-comic p{
 	line-height: 1.5em;
-    height: 7em;       
+    height: 9em;       
     overflow: hidden;
     text-overflow: ellipsis;  
 }
+
+.des-comic h5{
+	line-height: 1.5em;
+    height: 3em;       
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    font-weight: bold;
+}
+
 .des a{
 	bottom: inherit;
 	padding-bottom: 5px;
@@ -110,6 +119,54 @@
 .padd{
 	padding-bottom: 5px;
 
+}
+
+.separator-card{
+	margin-bottom: 10px;
+}
+
+.arrow{
+	float: left; 
+	display: none; 
+	padding-right: 10px; 
+	padding-top: 15px;
+}
+
+.btn-add{
+	width: 50%; 
+	height: 60px; 
+	float: left !important;
+	padding-top: 11px;
+	font-weight: bold;
+}
+
+.btn-buy{
+	width: 50%; 
+	height: 60px; 
+	float: right !important;
+	padding-top: 11px;
+	font-weight: bold;
+}
+
+.btn-icon{
+	float:left; 
+	margin-right: 20px; 
+	padding-left: 5px;
+	border-radius: 50%;
+}
+
+.margen-modal{
+	margin-left: 15px !important;
+	margin-top: 5px !important;
+	margin-right: -200px !important;
+}
+
+.btn-delete{
+	float: right;
+}
+
+.comic-link{
+	cursor:pointer;
 }
 
 .content-comic {
@@ -121,6 +178,8 @@
     top: -3%;
     right: 0%;
 }
+
+
 
 /*@media only screen and (max-width: 500px) {
 	.contet-comic-delete{

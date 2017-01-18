@@ -1,5 +1,5 @@
 <!-- BREADCRUMB CHARACTERS -->
-<div ng-controller="MarvelController" ng-init="getAllCharacters(0,10);">
+<div ng-controller="MarvelController" ng-init="getAllCharacters(0,10);getAll();">
 
 	<div class="row bread">
 	 	<div class="col s6 m6 l6 left">
@@ -22,7 +22,7 @@
 
 		<div class="row">
 
-	    <div ng-show="loader" class="row" style="margin: auto;">
+	    <div ng-show="loader" class="row"">
 			<div class="col l6 m6 s6">
 				<div class="preloader-wrapper big active loading">
 					<div class="spinner-layer spinner-red-only">
@@ -40,8 +40,8 @@
 			</div>
 		</div>
 			
-
-	          <div ng-hide="loader" class="col s12 m12 l6" style="margin-bottom: 5px;" ng-repeat="char in comic_obj | orderBy:sort">
+			<div ng-hide="loader"> 
+	          <div class="col s12 m12 l6 separator-card" ng-repeat="char in comic_obj | filter:query.title">
 	             <div class="card large z-depth-4">
 				    <div class="card-image characts waves-effect waves-block waves-light">
 				    	<img class="activator characts" ng-src="{{char.photo_url}}">
@@ -49,14 +49,15 @@
 				    </div>
 		        	 <div class="card-content des carta">
 				    	<span class="card-title grey-text text-darken-4" style="font-size: 20px;"><strong>{{char.name}}</strong></span>
-				      	<p>{{char.description}}</p>
+				      	<p>{{char.description}} -- {{query}}</p>
 				      	<p><a class="waves-effect waves-light btn red activator viewmore right">View more</a></p>
 		        	</div>
 				    <div class="card-reveal rel-comics">
 				    <span class="card-title grey-text text-darken-1"><b>Related comics</b><i class="material-icons right">close</i></span>
 				    	<div class="row">
 				    		<div class="col s6 m6 l6" ng-repeat-end ng-repeat-start="x in char.comics">
-				    			 <img style="float: left; display: none; padding-right: 10px; padding-top: 15px;" src="assets/img/icons/link-arrow.png" id="comic" title="{{x.name}}"></img><p style="text-decoration: underline;" ng-click="selectComic(x.name,x.id);" value="{{x.name}}" id="comic2" class="red-text padd">{{x.name }}</p>
+				    			 <img class="arrow" src="assets/img/icons/link-arrow.png" id="comic" title="{{x.name}}"></img>
+				    			 <p ng-click="selectComic(x.name,x.id);" value="{{x.name}}" id="comic2" class="red-text padd comic-link">{{x.name }}</p>
 				    			
 				    		</div>
 				    	</div>
@@ -70,35 +71,35 @@
 		  <div id="modal1" class="modal large">
 		    <div class="modal-content">
 		    	<div class="row">
-		    	<img style="float:right" class="modal-action modal-close" ng-src="assets/img/icons/btn-close.png"/>
-		    		<div class="col s6" style="width: 200px; height: 250px;">
-					    <img  style="width: 200px; height: 250px;" ng-src="{{comic_detail.img}}"/>
+		    	<img ng-click="closeModal(x.name);" class="comic-link btn-delete" ng-src="assets/img/icons/btn-close.png"/>
+		    		<div class="col s6" style="width: 250px; height: 280px;">
+					    <img  style="width: 250px; height: 280px;" ng-src="{{comic_detail.img}}"/>
 					</div>
-					<div class="col s6 des-comic" style="margin-left: 20px;">
+					<div class="col s6 des-comic margen-modal">
 					
-						<h4>{{comic_detail.title}}</h4>
+						<h5>{{comic_detail.title}}</h5>
 					      <p>{{comic_detail.description}}</p>
 					</div>
 			    </div>
 		    </div>
-		    <div class="modal-footer" style=" bottom: 0;">
+		    <div class="modal-footer">
 		    	
 		    		<div class="row">
 		    		<!-- <div class="col s6"> -->
 		    			<div ng_hide="boolFav">
-			      			<a class="waves-effect waves-default btn-flat gray ligthen-3 gray-text text-darken-2" ng-click="saveComic(comic_detail.title,comic_detail.img, comic_detail.id)" style="width: 50%; height: 60px; float: left; padding-top: 10px;">ADD TO FAVOURITES
-			      			<img style="float:left; margin-right: 20px; padding-left: 5px;" src="assets/img/icons/btn-favourites-default.png"></a>  
+			      			<a class="waves-effect waves-ligth btn-add btn-flat grey lighten-4  grey-text text-darken-4 " ng-click="saveComic(comic_detail.title,comic_detail.img, comic_detail.id)">ADD TO FAVOURITES
+			      			<img class="btn-icon" src="assets/img/icons/btn-favourites-default.png"></a>  
 						</div>
 
 						<div ng-show="boolFav">
-			      			<a class="waves-effect waves-default btn-flat brown darken-4 orange-text text-darken-3" style="width: 50%; height: 60px; float: left; padding-top: 10px;">ADDED TO FAVOURITES
-			      			<img style="float:left; margin-right: 20px; padding-left: 5px;" src="assets/img/icons/btn-favourites-primary.png"></a>  
+			      			<a class="waves-effect waves-light btn-add btn-flat brown darken-3 red-text text-accent-3">ADDED TO FAVOURITES
+			      			<img class="btn-icon" src="assets/img/icons/btn-favourites-primary.png"></a>  
 						</div>
 
 		      		
 		      	<!-- 	<div class="col s6"> -->
-		      			<a active class="waves-effect waves-light btn-flat gray ligthen-3 gray-text text-darken-2" style="width: 50%; float:right; padding-top: 10px; height: 60px;">BUY FOR ${{comic_detail.price}}
-		      			<img style="float:left; margin-right: 20px; padding-left: 5px;" src="assets/img/icons/shopping-cart-primary.png"></a>  
+		      			<a active class="waves-effect waves-light btn-buy btn-flat grey lighten-2 red-text text-accent-3" >BUY FOR ${{comic_detail.price}}
+		      			<img class="btn-icon" src="assets/img/icons/shopping-cart-primary.png"></a>  
 		      		</div>
 		      	</div>
 		    </div>
@@ -123,17 +124,21 @@
 <script type="text/javascript">
 		$(document).ready(function() {
     	// $('select').material_select();
-    	$('.modal').modal();
+    	$('.modal').modal({
+		      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+		      opacity: .4, // Opacity of modal background
+		      in_duration: 300, // Transition in duration
+		      out_duration: 200, // Transition out duration
+		      blur: 5 
+		      // starting_top: '4%', // Starting top style attribute
+		      // ending_top: '10%', // Ending top style attribute
+		    }
+  		);
+
+  		// $('.modal').modal();
     	 $('.materialboxed').materialbox();
     	  $('.tooltipped').tooltip({delay: 50});
 	
   	});
 	</script>
 </div>
-
-
-
-  
-
-	
-

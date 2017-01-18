@@ -1,9 +1,9 @@
 App.controller("MarvelController", function ($scope, $rootScope, $window, serviceMarvel){
  
 	$scope.sort = "Sort";
-	$scope.selected = "true";
-	$scope.search = "";
+	$scope.selected = "true";	
 	$scope.boolFav = false;
+	
 
 	// serviceMarvel.saveComic("");
 
@@ -61,6 +61,33 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 	    });
 	};
 
+	$scope.getAll = function(){
+
+		var obj = new Object();																	
+		var x = serviceMarvel.getAllCharacters($rootScope.apikey);
+		x.then(function(response){
+
+			for (var i = 0; i < response.data.data.results.length; i++) {
+				
+
+				obj[response.data.data.results[i].name] = response.data.data.results[i].id; 
+
+				$('input.autocomplete').autocomplete({
+			    	data : obj
+			    
+			  });
+				// filter.push(obj);
+
+			}
+			console.log("getALL");
+
+		},function(errorMsg){
+	      	console.log(errorMsg);
+	      	console.log("Error en el servidor");
+	    });
+
+	};
+
 	$scope.changePage = function(page){
 		
 		var cont = 0;
@@ -75,15 +102,12 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 		console.log(cont + " - " + cont2)
 		$scope.getAllCharacters(cont,cont2)
 
-	}
-
-	
+	};
 	
 	$scope.selectComic = function(name, id){
 			
 			// alert(name +" - "+ id);	
-		
-			var elementId = $("[title='"+name+"']:hidden").attr("title");
+			$scope.elementId = $("[title='"+name+"']:hidden").attr("title");
 			// alert(elementId);
 			var array = serviceMarvel.getComic();
 
@@ -91,8 +115,7 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 			console.log($scope.boolFav);
 			$scope.getComicById(id);
 
-
-			if(elementId == name){
+			if($scope.elementId == name){
 				setTimeout(function() {
 					$("[title='"+name+"']").show();
 					$('#modal1').modal('open');
@@ -101,10 +124,6 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 				
 
 			}
-
-			
-
-			
 
 	};
 
@@ -133,9 +152,6 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 			$scope.comic_detail.img = path+variant+ext;
 
 			console.log($scope.comic_detail);
-
-
-
 
 		},function(errorMsg){
 	      	console.log(errorMsg);
@@ -204,19 +220,24 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 	};
 
 	$scope.findFavs = function(array, id){
-
+		var bool = false;
 		 for (var aux in array) {
 
 		 	if(array[aux].id == id){
 		 		// alert(array[aux].id +"--"+ id);
-		 		return true;
-		 	}else{
+		 		bool = true;
+		 		break;
+
+		 	}else if(array[aux].id != id){
 		 		// alert(array[aux].id +"--"+ id);
-		 		return false;
+		 		bool = false;
+		 		
 		 	}
 		 }
 
-	}
+		 return bool;
+
+	};
 
 
 
@@ -249,6 +270,13 @@ function shuffle(array) {
         }
 
     });
+
+	 $scope.closeModal = function(name){
+	 	$("[title='"+$scope.elementId+"']").hide();
+	 	 $('#modal1').modal('close');
+	 	 
+	 };
+
 	// setInterval(function() {
 	// 	console.log($scope.search);
 	// }, 10000);

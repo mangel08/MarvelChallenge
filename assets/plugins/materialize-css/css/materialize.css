@@ -5388,7 +5388,7 @@ button.btn-floating {
 
 .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
   float: right;
-  margin: 0px 0;
+  margin: 0px 0px 0px 0px;
 }
 
 .modal-overlay {
@@ -5415,7 +5415,7 @@ button.btn-floating {
   height: calc(100% - 56px);
   max-height: 100%;
   width: 100%;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
 }
 
 .modal.modal-fixed-footer .modal-footer {
