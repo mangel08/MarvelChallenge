@@ -24,21 +24,6 @@ App.config(function($routeProvider){
 
 App.controller("HeaderController", function($scope, $rootScope){
 		
-	// $scope.bool = true;
-	// // alert($scope.bool);
-
-	// // $scope.search = "Captain America";
-	// // console.log($scope.search);
-
-	// $scope.onSearch = function(){
-	// 	if($scope.bool==true){
-	// 		$scope.bool=false;
-	// 	}else{
-	// 		$scope.bool=true;
-	// 	}
-
-	// 	console.log($scope.bool);
-	// }
 
 });
 
@@ -52,7 +37,7 @@ App.controller("SidebarController", function($scope, $rootScope, serviceMarvel){
 	console.log($rootScope.valid);
 	
 	
-	if($rootScope.valid != ""&& $rootScope.valid != null && typeof $rootScope.valid != "undefined"){
+	if($rootScope.valid != "" && $rootScope.valid != null && typeof $rootScope.valid != "undefined"){
 		$rootScope.boolList = false;
 		// alert("muestra");
 	}else{

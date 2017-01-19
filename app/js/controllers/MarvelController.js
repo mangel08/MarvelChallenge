@@ -223,6 +223,7 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 
 		 for (var aux in $rootScope.validate) {
 
+
 		 		if($rootScope.validate[aux].id == id){
 
 		 			break;
@@ -231,14 +232,6 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 		 }
 
 		}
-
-		if($rootScope.validate.length == 4){
-
- 			var $toastContent = $('<span>Maximun five comics favorites!</span>');
-			Materialize.toast($toastContent, 5000);
-
- 			break;
- 		}
 
 		comic.title = title;
 		comic.img = img;
