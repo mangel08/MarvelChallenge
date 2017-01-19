@@ -1,5 +1,11 @@
 App.controller("MarvelController", function ($scope, $rootScope, $window, serviceMarvel){
  
+    /* * * * * * * * * * * * * * * * * * * * * * 
+     * * * * AUTOR: MIGUELANGEL PALMA  * * * * * 
+     * * DESARROLLADOR WEB & MOBILE ANDROID *  *
+     * * * * * CARACAS - VENEZUELA * * * * * * * 
+     * * * * * * * * * * * * * * * * * * * * * */
+
 	$scope.sort = "Sort";
 	$scope.selected = "true";	
 	$scope.boolFav = false;
@@ -12,41 +18,26 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 	$scope.flag = serviceMarvel.getFlag("Flag");
 	$scope.id = serviceMarvel.getCharact("Charact");
 
-	// if(typeof $scope.flag === "undefined" || $scope.flag == null){
-	// 	$scope.flag = false;
-	// }
-
-	// if($scope.flag == false){
-	// 	$scope.getAllCharacters(0,10);
-	// 	$scope.getAll();
-	// }else{
-	// 	alert($scope.flag);
-	// 	$scope.getCharacterById();
-	// }
-	// serviceMarvel.saveComic("");
-
-	// $scope.getAllCharacters($scope.flag);
-
-	// SERVICIO GET PARA CONSULTAR LA DATA DE LOS PERSONAJES
-
+	// FUNCION PARA VALIDAR LA CARGA DE DATOS 
 	$scope.getAllCharacters = function(bool){
-	
 
 	if(bool == false || bool == null){
 		console.log(bool);
-	
+
+		// LOAD All Characters
 		$scope.getCharacters(0,10);
 		$scope.getAll();
 
 	}else{
-		// console.log(bool);
-		// console.log($scope.id);
+		
+		// LOAD CHARACTER BY ID
 		$scope.getAll();
 		$scope.getCharacterById($scope.id);
 	}
 	
 	};
 
+	// FUNCION SCOPE PARA HACER LLAMADO AL SERVICE ALL CHARACTERS
 	$scope.getCharacters = function(cont,cont2,name){
 		
 		// $scope.loader = true;
@@ -104,6 +95,7 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 	    });
 	}
 
+	// FUNCION PARA GUARDAR TODOS LOS CHARACTERS EN LOCALSTORAGE
 	$scope.getAll = function(){
 
 		var obj = new Object();	
@@ -120,9 +112,6 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 
 				obj[response.data.data.results[i].name] = path+variant+ext;
 				obj2[response.data.data.results[i].name] = id;
-
-				 
-
 
 			}
 			$('input.autocomplete').autocomplete({
@@ -143,6 +132,7 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 
 	};
 
+	// FUNCION PARA CAMBIAR DE PAGINA
 	$scope.changePage = function(page){
 		
 		var cont = 0;
@@ -159,6 +149,7 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 
 	};
 	
+	// FUNCION PARA ABRIR MODAL DE UN COMIC
 	$scope.selectComic = function(name, id){
 			
 			// alert(name +" - "+ id);	
@@ -182,6 +173,7 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 
 	};
 
+	// FUNCION SCOPE PARA BUSCAR UN COMIC POR ID MEDIANTE EL SERVICE getComicById()
 	$scope.getComicById = function(id){
 
 		var x = serviceMarvel.getComicById($rootScope.apikey, id);
@@ -216,7 +208,7 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 
 	};
 
-
+	// FUNCION SCOPE PARA GUARDAR UN COMIC EN LOCALSTORAGE Y MOSTRARLO EN FAVORITOS
 	$scope.saveComic  = function(title, img, id){
 		console.log(title + " - " + img + " - " + id);
 		$rootScope.validate = serviceMarvel.getComic("FComics");
@@ -231,24 +223,22 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 
 		 for (var aux in $rootScope.validate) {
 
-		 		if($rootScope.validate.length == 5){
-
-		 			var $toastContent = $('<span>Maximun six comics favorites!</span>');
-					Materialize.toast($toastContent, 5000);
-
-		 			break;
-		 		}
-
 		 		if($rootScope.validate[aux].id == id){
 
- 				//  	var $toastContent = $('<span>The comic already exist in favorites!</span>');
-					// Materialize.toast($toastContent, 5000);
 		 			break;
 		 		}
 
 		 }
 
 		}
+
+		if($rootScope.validate.length == 4){
+
+ 			var $toastContent = $('<span>Maximun five comics favorites!</span>');
+			Materialize.toast($toastContent, 5000);
+
+ 			break;
+ 		}
 
 		comic.title = title;
 		comic.img = img;
@@ -264,16 +254,14 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 		$rootScope.boolList = false;
 		 $('#modal1').modal('close');
 
-    
-
 		setTimeout(function() {
 				location.reload();
 		}, 2000);
 		
-
-
 	};
 
+	/* FUNCION SCOPE PARA VALIDAR EXISTENCIA DE COMICS EN LOCALSTORAGE
+	 * SI RETORNA TRUE EXISTE EL COMIC EN FAVORITOS, SI NO RETORNARA FALSE*/
 	$scope.findFavs = function(array, id){
 		var bool = false;
 		 for (var aux in array) {
@@ -293,6 +281,9 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 
 	};
 
+		/*FUNCION SCOPE CALLBACK PARA HACER MATCH DE UN CHARACTER
+		  MEDIANTE EL NOMBRE Y ASOCIANDOLO A SU ID PARA LUEGO 
+		  GUARDARLO EN LOCALSTORAGE*/
 		$scope.callBackCharact = function(name){
 
 			var charact = serviceMarvel.getCharacters("Characters");
@@ -318,9 +309,8 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 			}, 2000);
 		}
 
+		/*FUNCION SCOPE PARA BUSCAR UN CHARACTER POR ID*/
 		$scope.getCharacterById = function(id){
-
-			// $scope.loader = true;
 
 			var x = serviceMarvel.getCharacterById($rootScope.apikey,id);
 			 x.then(function(response){
@@ -377,19 +367,15 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 		
 	}
 
-
-
-function shuffle(array) {
+	// FUNCION PARA DESORNEDAR UN ARREGLO
+	function shuffle(array) {
 	  var currentIndex = array.length, temporaryValue, randomIndex;
-
-	  // While there remain elements to shuffle...
+	
 	  while (0 !== currentIndex) {
-
-	    // Pick a remaining element...
+	   
 	    randomIndex = Math.floor(Math.random() * currentIndex);
 	    currentIndex -= 1;
-
-	    // And swap it with the current element.
+	   
 	    temporaryValue = array[currentIndex];
 	    array[currentIndex] = array[randomIndex];
 	    array[randomIndex] = temporaryValue;
@@ -398,27 +384,10 @@ function shuffle(array) {
 	  return array;
 	}
 
-	 // $('.sort').change(function(){
-  //       if($('.sort').find('[value=Upward]').prop('selected')==true){              
-  //           $scope.sort = "name:reverse";
-  //           alert("upward");
-  //       }else if($('.sort').find('[value=Forward]').prop('selected')==true){
-  //       	$scope.sort = "name:";
-  //       	alert("falling");
-  //       }
-
-  //   });
-
+  	 // FUNCION PARA CERRAR MODAL 
 	 $scope.closeModal = function(name){
 	 	$("[title='"+$scope.elementId+"']").hide();
 	 	 $('#modal1').modal('close');
 	 	 
 	 };
-
-	// setInterval(function() {
-	// 	console.log($scope.search);
-	// }, 10000);
-
-	
-
 });
