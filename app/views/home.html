@@ -1,5 +1,5 @@
 <!-- BREADCRUMB CHARACTERS -->
-<div ng-controller="MarvelController" ng-init="getAllCharacters(0,10);getAll();">
+<div ng-controller="MarvelController" ng-init="getAllCharacters(flag);">
 
 	<div class="row bread">
 	 	<div class="col s6 m6 l6 left">
@@ -11,7 +11,8 @@
 	  	<div class="input field bread sort col s2 m2 l2 right">
 	  		<div input-field class="black-text">
 		    	<select  ng-model="sort" material-select watch>
-		        	 <option value="Upward" selected="selected">Upward</option>
+		    		 <option value="Sort" selected>Sort</option>
+		        	 <option value="Upward">Upward</option>
 	      			 <option value="Falling">Falling</option>
 		    	</select>
 		  	</div>
@@ -41,7 +42,7 @@
 		</div>
 			
 			<div ng-hide="loader"> 
-	          <div class="col s12 m12 l6 separator-card" ng-repeat="char in comic_obj | filter:query.title">
+	          <div class="col s12 m12 l6 separator-card" ng-repeat="char in comic_obj">
 	             <div class="card large z-depth-4">
 				    <div class="card-image characts waves-effect waves-block waves-light">
 				    	<img class="activator characts" ng-src="{{char.photo_url}}">

@@ -12,7 +12,7 @@
 <div class="row" ng-hide="boolList">
   	<div class="col s12 m12 l12 des" ng-repeat="list in comics_fav">
           <div class="content-comic">
-         <img class="materialboxed " data-caption="{{list.title}}" width="250"ng-src="{{list.img}}">
+         <img class="materialboxed " data-caption="{{list.title}}" width="250" height="340px;" ng-src="{{list.img}}">
          <a  ng-click="deleteComic(list.id)"><img class="content-comic-delete comic-link" ng-src="assets/img/icons/btn-delete.png"/></a>
           <p class="card-title black-text" style="text-align: center;"><strong>{{list.title}}</strong></p>
           </div>

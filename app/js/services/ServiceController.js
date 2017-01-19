@@ -12,7 +12,11 @@ App.service("serviceMarvel", function ($rootScope, $resource, $q, $http, localSt
 	
 	 const base_url = 'https://gateway.marvel.com/';
 
-	 //SERVICIO PARA AGREGAR EVENTOS
+            	 /* * * * * * * * * * * * * * * * * * * * * * * * *
+                  * *   S E R V I C E S   A P I   M A R V E L * * *
+                  * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
             this.getAllCharacters = function(key){
             var defered = $q.defer();
             $http({
@@ -49,16 +53,65 @@ App.service("serviceMarvel", function ($rootScope, $resource, $q, $http, localSt
                     };
             
 
-        this.saveComic = function saveComic(obj) {
-            localStorageService.set("FComics", "");
-            localStorageService.set("FComics", obj);
-        };
+            this.getCharacterById = function(key,id){
+                var defered = $q.defer();
 
-        this.getComic = function getComic() {
-             return localStorageService.get("FComics");
-         };
+                $http({
+                    method : 'GET',
+                    url: base_url+'/v1/public/characters/'+id+"?"+time+ts+apk+public_key+hash+key,
+                     headers: 
+                    {
+                    'Content-Type': 'application/json'
+                    },
+                }).then(function(response) {
+                    defered.resolve(response); 
+                    }, function(errorMsg){
+                        defered.reject(errorMsg);
+                    });
+                        return defered.promise;
+                    };
+
+
+            /* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+             * * * F U N C I O N E S * L O C A L * S T O R A G E * * * 
+             * * * * * * * * * * * * * * * * * * * * * * * * * * * * */ 
+
+            this.saveComic = function saveComic(obj) {
+                localStorageService.set("FComics", "");
+                localStorageService.set("FComics", obj);
+            };
+
+            this.getComic = function getComic() {
+                 return localStorageService.get("FComics");
+             };
         
 
 
+            this.saveCharacters = function saveCharacters(obj) {
+                localStorageService.set("Characters", "");
+                localStorageService.set("Characters", obj);
+            };
+
+            this.getCharacters = function getCharacters() {
+                 return localStorageService.get("Characters");
+             };
+
+          this.saveFlag = function saveFlag(bool) {
+                localStorageService.set("Flag", false);
+                localStorageService.set("Flag", bool);
+            };
+
+            this.getFlag = function getFlag() {
+                 return localStorageService.get("Flag");
+             };
+
+            this.saveCharact = function saveCharact(id) {
+                localStorageService.set("Charact", "");
+                localStorageService.set("Charact", id);
+            };
+
+            this.getCharact = function getCharact() {
+                 return localStorageService.get("Charact");
+             };
 
 });

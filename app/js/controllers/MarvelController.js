@@ -3,23 +3,62 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 	$scope.sort = "Sort";
 	$scope.selected = "true";	
 	$scope.boolFav = false;
-	
+	$scope.query = "";
+	$scope.filter = {};
+	$scope.comic_obj = [];
+	$scope.loader = true;
+	$scope.boolp = false;
 
+	$scope.flag = serviceMarvel.getFlag("Flag");
+	$scope.id = serviceMarvel.getCharact("Charact");
+
+	// if(typeof $scope.flag === "undefined" || $scope.flag == null){
+	// 	$scope.flag = false;
+	// }
+
+	// if($scope.flag == false){
+	// 	$scope.getAllCharacters(0,10);
+	// 	$scope.getAll();
+	// }else{
+	// 	alert($scope.flag);
+	// 	$scope.getCharacterById();
+	// }
 	// serviceMarvel.saveComic("");
+
+	// $scope.getAllCharacters($scope.flag);
 
 	// SERVICIO GET PARA CONSULTAR LA DATA DE LOS PERSONAJES
 
-	$scope.getAllCharacters = function(cont,cont2,name){
-	$scope.loader = true;
-	var x = serviceMarvel.getAllCharacters($rootScope.apikey);
-	x.then(function(response){
+	$scope.getAllCharacters = function(bool){
+	
+
+	if(bool == false || bool == null){
+		console.log(bool);
+	
+		$scope.getCharacters(0,10);
+		$scope.getAll();
+
+	}else{
+		// console.log(bool);
+		// console.log($scope.id);
+		$scope.getAll();
+		$scope.getCharacterById($scope.id);
+	}
+	
+	};
+
+	$scope.getCharacters = function(cont,cont2,name){
+		
+		// $scope.loader = true;
+		var x = serviceMarvel.getAllCharacters($rootScope.apikey);
+		x.then(function(response){
 
 		$scope.comic_obj = [];
 		
 		for (var i = cont; i < cont2; i++) {
 			var comic_obj = new Object();
 			comic_obj.name = response.data.data.results[i].name;
-			$scope.total = response.data.data.limit;
+			$scope.total = response.data.data.count;
 			
 			var cad = "I am a super hero of MARVEL comics";
 			
@@ -47,38 +86,54 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 						var aux = response.data.data.results[i].comics.items[j].resourceURI.split("/");
 						obj_comic.id = aux[aux.length-1];
 						comic_obj.comics.push(obj_comic);
+						
 				}
 			}
 			$scope.comic_obj.push(comic_obj);
 		}
-			console.log($scope.comic_obj);
-			console.log(response.data);
+			// console.log($scope.comic_obj);
+			// console.log(response.data);
+			
+			// console.log($scope.loader);
+
 			$scope.loader = false;
 
 		},function(errorMsg){
 	      	console.log(errorMsg);
 	      	console.log("Error en el servidor");
 	    });
-	};
+	}
 
 	$scope.getAll = function(){
 
-		var obj = new Object();																	
+		var obj = new Object();	
+		var obj2 = new Object();																
 		var x = serviceMarvel.getAllCharacters($rootScope.apikey);
 		x.then(function(response){
 
 			for (var i = 0; i < response.data.data.results.length; i++) {
 				
+				let path = response.data.data.results[i].thumbnail.path;
+				let ext = response.data.data.results[i].thumbnail.extension;
+				let variant = "/standard_medium.";
+				let id = response.data.data.results[i].id;
 
-				obj[response.data.data.results[i].name] = response.data.data.results[i].id; 
+				obj[response.data.data.results[i].name] = path+variant+ext;
+				obj2[response.data.data.results[i].name] = id;
 
-				$('input.autocomplete').autocomplete({
+				 
+
+
+			}
+			$('input.autocomplete').autocomplete({
 			    	data : obj
 			    
 			  });
-				// filter.push(obj);
-
-			}
+			console.log(obj);
+			serviceMarvel.saveCharacters(obj2);
+			
+				
+				console.log($scope.filter);
 			console.log("getALL");
 
 		},function(errorMsg){
@@ -100,7 +155,7 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 		}
 		}
 		console.log(cont + " - " + cont2)
-		$scope.getAllCharacters(cont,cont2)
+		$scope.getCharacters(cont,cont2)
 
 	};
 	
@@ -222,7 +277,6 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 	$scope.findFavs = function(array, id){
 		var bool = false;
 		 for (var aux in array) {
-
 		 	if(array[aux].id == id){
 		 		// alert(array[aux].id +"--"+ id);
 		 		bool = true;
@@ -238,6 +292,90 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 		 return bool;
 
 	};
+
+		$scope.callBackCharact = function(name){
+
+			var charact = serviceMarvel.getCharacters("Characters");
+			var id = 0;
+			console.log(charact);
+
+			 for (var aux in charact) {
+
+			 	if(aux == name){
+			 		id = charact[aux];
+			 		serviceMarvel.saveCharact(id);
+			 		// alert(id);
+			 		// console.log(id);
+			 		break;
+			 	}
+
+			 }
+
+			 serviceMarvel.saveFlag(true);
+
+			 setTimeout(function() {
+				location.reload();
+			}, 2000);
+		}
+
+		$scope.getCharacterById = function(id){
+
+			// $scope.loader = true;
+
+			var x = serviceMarvel.getCharacterById($rootScope.apikey,id);
+			 x.then(function(response){
+			 
+			 	
+			 	$scope.comic_obj = [];
+				console.log(response.data);
+
+				var comic_obj = new Object();
+				comic_obj.name = response.data.data.results[0].name;
+				$scope.total = response.data.data.count;
+				
+				var cad = "I am a super hero of MARVEL comics";
+				
+				if(response.data.data.results[0].description==""){
+					comic_obj.description = cad;
+				}else{
+				comic_obj.description = response.data.data.results[0].description;
+				}
+
+				let path = response.data.data.results[0].thumbnail.path;
+				let variant = "/landscape_xlarge";
+				let ext = "."+response.data.data.results[0].thumbnail.extension;
+				let photo_url =  path+variant+ext;
+
+				comic_obj.photo_url = photo_url;
+				comic_obj.cont = 0;
+				comic_obj.comics = [];
+
+				if(response.data.data.results[0].comics.items.length >= 1){
+					
+					for (var i = 0; i < response.data.data.results[0].comics.items.length; i++) {
+						
+						obj_comic = new Object();
+						obj_comic.name = response.data.data.results[0].comics.items[i].name;
+						var aux = response.data.data.results[0].comics.items[i].resourceURI.split("/");
+						obj_comic.id = aux[aux.length-1];
+						comic_obj.comics.push(obj_comic);
+					}
+					
+				}
+					$scope.comic_obj.push(comic_obj);
+					console.log($scope.comic_obj);
+				
+					serviceMarvel.saveFlag(false);
+					$scope.loader = false;
+
+			},function(errorMsg){
+	      	console.log(errorMsg);
+	      	console.log("Error en el servidor");
+
+	      		serviceMarvel.saveFlag(false);
+	    });
+		
+	}
 
 
 
@@ -260,16 +398,16 @@ function shuffle(array) {
 	  return array;
 	}
 
-	 $('.sort').change(function(){
-        if($('.sort').find('[value=Upward]').prop('selected')==true){              
-            $scope.sort = "name:reverse";
-            alert("upward");
-        }else if($('.sort').find('[value=Forward]').prop('selected')==true){
-        	$scope.sort = "name:";
-        	alert("falling");
-        }
+	 // $('.sort').change(function(){
+  //       if($('.sort').find('[value=Upward]').prop('selected')==true){              
+  //           $scope.sort = "name:reverse";
+  //           alert("upward");
+  //       }else if($('.sort').find('[value=Forward]').prop('selected')==true){
+  //       	$scope.sort = "name:";
+  //       	alert("falling");
+  //       }
 
-    });
+  //   });
 
 	 $scope.closeModal = function(name){
 	 	$("[title='"+$scope.elementId+"']").hide();
@@ -281,5 +419,6 @@ function shuffle(array) {
 	// 	console.log($scope.search);
 	// }, 10000);
 
+	
 
 });

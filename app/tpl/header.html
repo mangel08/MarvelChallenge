@@ -1,10 +1,10 @@
- <div  class="navbar-fixed" ng-controller="MarvelController">
+ <div  class="navbar-fixed" ng-controller="MarvelController" ng-init="getAllCharacters(flag);">
     <nav>
       <div class="nav-wrapper grey darken-4">
         <a href="#" class="brand-logo left logo-adjust"><img class="img-logo" src="assets/img/icons/Marvel-Logo.png"></a>
         <form>
-        <div class="input-field right" style="text-align: center;"">
-          <input id="autocomplete-input"  class="autocomplete" placeholder="Search character..." type="search" ng-model="query.title">
+        <div class="input-field right" style="text-align: center; width: 300px;">
+          <input id="autocomplete-input" class="autocomplete" placeholder="Search character..." type="search" ng-model="query" ng-keyup="$event.keyCode == 13 && callBackCharact(query);">
           <label for="search" ><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
           </div>
@@ -20,8 +20,10 @@
     <div class="nav-wrapper grey darken-4">
       <form>
         <div class="input-field">
-          <input id="search"  placeholder="Search character..." type="search" required>
-          <label for="search"><i class="material-icons">search</i></label>
+          <input id="autocomplete-input" class="autocomplete" placeholder="Search character..." type="search" ng-model="query" ng-keyup="$event.keyCode == 13 && callBackCharact(query);">
+          <label for="search" ><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+          </div>
           <i ng-click="onSearch();" class="material-icons">close</i>
         </div>
       </form>
