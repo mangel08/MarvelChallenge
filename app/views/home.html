@@ -2,29 +2,29 @@
 <div ng-controller="MarvelController" ng-init="getAllCharacters(flag);">
 
 	<div class="row bread">
-	 	<div class="col s6 m6 l6 left">
+	 	<div class="col s12 m6 l6 left">
 	      	<img  class="logo character" src="assets/img/icons/characters.png">
 	        <div class="texto black-text"><strong>Characters</strong></div>
 	   
 	  	</div>
 
-	  	<div class="input field bread sort col s2 m2 l2 right">
+	  <!-- 	<div class="input field bread sort col s12 m2 l2 right">
 	  		<div input-field class="black-text">
-		    	<select  ng-model="sort" material-select watch>
-		    		 <option value="Sort" selected>Sort</option>
+		    	<select ng-model="sort" material-select watch>
+		    		 <option value="Sort" disabled>Sort</option>
 		        	 <option value="Upward">Upward</option>
 	      			 <option value="Falling">Falling</option>
 		    	</select>
 		  	</div>
-		</div>
+		</div> -->
 
 	</div>
 	<!-- END BREADCRUMB CHARACTERS -->
 
 		<div class="row">
 
-	    <div ng-show="loader" class="row"">
-			<div class="col l6 m6 s6">
+	    <div ng-show="loader" class="row center">
+			<div class="col l12 m12 s12">
 				<div class="preloader-wrapper big active loading">
 					<div class="spinner-layer spinner-red-only">
 						<div class="circle-clipper left">

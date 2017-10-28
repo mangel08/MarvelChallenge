@@ -11,6 +11,8 @@
 
 	<link rel="shortcut icon" href="assets/img/icons/marvel.png">
 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="assets/plugins/materialize-css/css/materialize.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">	
@@ -24,13 +26,13 @@
   	</header>
   	<main>
   	<div class="row">
-  		<div class="col l9 m7 s7 grey lighten-3 content">
+  		<div class="col l9 m7 s12 grey lighten-3 content">
 		  	<div ng-view class="margen">
 		  		 	
 		  	</div>
 	  	</div>
 
-		<div class="col l3 m5 s5 grey lighten-2 sidebar" id="sidebar">
+		<div class="col l3 m5 s12 grey lighten-2 sidebar" id="sidebar">
 	  		<div class="margen" data-ng-include src="'app/tpl/sidebar.html'" data-ng-controller="SidebarController">
 	  		</div>
 	  	</div>

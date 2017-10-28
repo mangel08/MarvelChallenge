@@ -14,6 +14,7 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 	$scope.comic_obj = [];
 	$scope.loader = true;
 	$scope.boolp = false;
+	$scope.bool = true;
 
 	$scope.flag = serviceMarvel.getFlag("Flag");
 	$scope.id = serviceMarvel.getCharact("Charact");
@@ -212,6 +213,8 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 	$scope.saveComic  = function(title, img, id){
 		console.log(title + " - " + img + " - " + id);
 		$rootScope.validate = serviceMarvel.getComic("FComics");
+		console.log("SADJHAS");
+		console.log($rootScope.validate);
 		var comics_list = [];
 		var comic = new Object();
 
@@ -233,23 +236,29 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 
 		}
 
-		comic.title = title;
-		comic.img = img;
-		comic.id = id;
+		if($rootScope.validate.length == 6){
+			 var $toastContent = $('<span>Maximun six favourites comics!</span>');
+  			 Materialize.toast($toastContent, 5000);
+		}else{
 
-		comics_list.push(comic);
+			comic.title = title;
+			comic.img = img;
+			comic.id = id;
 
-		console.log(comics_list);
+			comics_list.push(comic);
 
-		serviceMarvel.saveComic(comics_list);
-		 var $toastContent = $('<span>Comic saved in favorites</span>');
-  		Materialize.toast($toastContent, 5000);
-		$rootScope.boolList = false;
-		 $('#modal1').modal('close');
+			console.log(comics_list);
 
-		setTimeout(function() {
-				location.reload();
-		}, 2000);
+			serviceMarvel.saveComic(comics_list);
+			 var $toastContent = $('<span>Comic saved in favorites</span>');
+	  		Materialize.toast($toastContent, 5000);
+			$rootScope.boolList = false;
+			 $('#modal1').modal('close');
+
+			setTimeout(function() {
+					location.reload();
+			}, 2000);
+		}	
 		
 	};
 
@@ -279,27 +288,30 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 		  GUARDARLO EN LOCALSTORAGE*/
 		$scope.callBackCharact = function(name){
 
-			var charact = serviceMarvel.getCharacters("Characters");
-			var id = 0;
-			console.log(charact);
+			if(name.length > 3){
 
-			 for (var aux in charact) {
+				var charact = serviceMarvel.getCharacters("Characters");
+				var id = 0;
+				console.log(charact);
 
-			 	if(aux == name){
-			 		id = charact[aux];
-			 		serviceMarvel.saveCharact(id);
-			 		// alert(id);
-			 		// console.log(id);
-			 		break;
-			 	}
+				 for (var aux in charact) {
 
-			 }
+				 	if(aux == name){
+				 		id = charact[aux];
+				 		serviceMarvel.saveCharact(id);
+				 		// alert(id);
+				 		// console.log(id);
+				 		break;
+				 	}
 
-			 serviceMarvel.saveFlag(true);
+				 }
 
-			 setTimeout(function() {
-				location.reload();
-			}, 2000);
+				 serviceMarvel.saveFlag(true);
+
+				 setTimeout(function() {
+					location.reload();
+				}, 2000);
+			}
 		}
 
 		/*FUNCION SCOPE PARA BUSCAR UN CHARACTER POR ID*/
@@ -383,4 +395,9 @@ App.controller("MarvelController", function ($scope, $rootScope, $window, servic
 	 	 $('#modal1').modal('close');
 	 	 
 	 };
+
+	 $scope.showSearchBar = function(){
+	 	console.log($scope.bool);
+	 	$scope.bool = !$scope.bool;
+	 }
 });

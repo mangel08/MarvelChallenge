@@ -1,34 +1,39 @@
- <div  class="navbar-fixed" ng-controller="MarvelController" ng-init="getAllCharacters(flag);">
+ <div ng-controller="MarvelController" ng-init="getAllCharacters(flag);">
+  
+  <div ng-show="bool" class="navbar-fixed">
     <nav>
       <div class="nav-wrapper grey darken-4">
         <a href="#" class="brand-logo left logo-adjust"><img class="img-logo" src="assets/img/icons/Marvel-Logo.png"></a>
         <form>
-        <div class="input-field right" style="text-align: center; width: 300px;">
-          <input id="autocomplete-input" class="autocomplete" placeholder="Search character..." type="search" ng-model="query" ng-keyup="$event.keyCode == 13 && callBackCharact(query);">
+        <div class="input-field right hide-on-med-and-down" style="text-align: center; width: 300px;">
+          <input id="autocomplete-input" class="autocomplete" placeholder="Search character..." type="search" ng-model="query" ng-change="callBackCharact(query);" ng-keyup="$event.keyCode == 13 && callBackCharact(query);">
           <label for="search" ><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
           </div>
+          <ul ng-click="showSearchBar();" class="right hide-on-large-only">
+          <li><a><i class="material-icons right">search</i></a></li>
+        </ul>
       </form>
-        <!-- <ul class="right hide-on-med-and-down">
-          <li><a  ng-click="onSearch();"><i class="material-icons right">search</i></a></li>
-        </ul> -->
+        
       </div>
     </nav>
   </div>
 
-  <!-- <nav ng-hide="bool">
-    <div class="nav-wrapper grey darken-4">
-      <form>
-        <div class="input-field">
-          <input id="autocomplete-input" class="autocomplete" placeholder="Search character..." type="search" ng-model="query" ng-keyup="$event.keyCode == 13 && callBackCharact(query);">
-          <label for="search" ><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-          </div>
-          <i ng-click="onSearch();" class="material-icons">close</i>
-        </div>
+  <div ng-hide="bool" class="navbar-fixed">
+    <nav >
+      <div class="nav-wrapper grey darken-4">
+        <form>
+          <div class="input-field">
+            <input id="autocomplete-input" class="autocomplete" placeholder="Search character..." type="search" ng-model="query" ng-change="callBackCharact(query);" ng-keyup="$event.keyCode == 13 && callBackCharact(query);">
+            <label for="search" ><i class="material-icons">search</i></label>
+            <i ng-click="showSearchBar();" class="material-icons">close</i>
+            </div>
       </form>
-    </div>
-  </nav> -->
+      </div>
+    </nav>
+  </div>
+
+</div>
 
 
 

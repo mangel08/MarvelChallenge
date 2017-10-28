@@ -3,8 +3,8 @@
 }
 
 .img-logo{
-	width: 150px;
-	height: 55px;
+	width: 115px;
+	height: auto;
 	margin-top: 5px;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .margen{
-	padding: 20px;
+	padding: 10px;
 }
 
 .bread{
@@ -179,6 +179,13 @@
     right: 0%;
 }
 
+@media (max-width: 384px) {
+	.content-comic-delete {
+	    top: -3%;
+    	right: 15%;
+	}
+}
+
 
 
 /*@media only screen and (max-width: 500px) {
@@ -224,3 +231,4 @@ body {
     font-family: RobotoBold;
     src: url(../plugins/materialize-css/fonts/roboto/Roboto-Regular.woff2);
 }
+
